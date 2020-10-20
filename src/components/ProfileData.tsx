@@ -37,6 +37,78 @@ const useStyles = makeStyles((theme) => ({
 	["info-item__text"]: {
 		marginLeft: "42px",
 	},
+	["@media (max-width: 1000px)"]: {
+		["info-item__icon"]: {
+			width: "33px",
+			height: "33px",
+		},
+		["info-item"]: {
+			height: "88px",
+			paddingLeft: "57px",
+			fontSize: "17px",
+			lineHeight: "23px",
+		},
+		["icon-wrapper"]: {
+			minWidth: "32px",
+		},
+		["info-item__text"]: {
+			marginLeft: "30px",
+		},
+	},
+	["@media (max-width: 684px)"]: {
+		["info-item__icon"]: {
+			width: "30px",
+			height: "30px",
+		},
+		["info-item"]: {
+			height: "80px",
+			paddingLeft: "40px",
+			fontSize: "16px",
+			lineHeight: "22px",
+		},
+		["icon-wrapper"]: {
+			minWidth: "32px",
+		},
+		["info-item__text"]: {
+			marginLeft: "20px",
+		},
+	},
+	["@media (max-width: 520px)"]: {
+		["info-item__icon"]: {
+			width: "27px",
+			height: "27px",
+		},
+		["info-item"]: {
+			height: "72px",
+			paddingLeft: "27px",
+			fontSize: "15px",
+			lineHeight: "21px",
+		},
+		["icon-wrapper"]: {
+			minWidth: "32px",
+		},
+		["info-item__text"]: {
+			marginLeft: "12px",
+		},
+	},
+	["@media (max-width: 414px)"]: {
+		["info-item__icon"]: {
+			width: "24px",
+			height: "24px",
+		},
+		["info-item"]: {
+			height: "64px",
+			paddingLeft: "12px",
+			fontSize: "14px",
+			lineHeight: "19px",
+		},
+		["icon-wrapper"]: {
+			minWidth: "32px",
+		},
+		["info-item__text"]: {
+			marginLeft: "0px",
+		},
+	},
 }));
 
 export const ProfileData: React.FC<{}> = () => {
