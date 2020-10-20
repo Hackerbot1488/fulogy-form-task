@@ -7,7 +7,9 @@ import {
 	TextField,
 } from "@material-ui/core";
 import { AssignmentInd, Phone, AlternateEmail } from "@material-ui/icons";
-import React from "react";
+import React, { useState } from "react";
+import { ProfileEditModal } from "./ProfileEditModal/ProfileEditModal";
+import classes from "./ProfileForm.module.sass";
 const useStyles = makeStyles((theme) => ({
 	form: {
 		display: "flex",
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 		paddingTop: "26px",
 		paddingBottom: "15px",
 		justifyContent: "center",
+		maxWidth: "none",
 	},
 	["form-container_bottom"]: {
 		paddingTop: "15px",
@@ -48,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 	form__input: {
 		fontSize: "14px",
 		lineHeight: "19px",
+		width: "270px",
 	},
 	form__button: {
 		color: "#fff",
@@ -58,8 +62,30 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: "36px",
 		padding: "15px 26px",
 	},
+	root: {
+		"& label": {
+			"&.Mui-focused": {
+				color: "#01bda7",
+			},
+		},
+		"& .MuiOutlinedInput-root": {
+			"&:hover fieldset": {
+				borderColor: "black",
+			},
+			"&.Mui-focused fieldset": {
+				borderColor: "#01bda7",
+			},
+		},
+	},
 }));
 export const ProfileForm: React.FC<{}> = () => {
+	const [opened, setOpened] = useState(false);
+	function openModal() {
+		setOpened(true);
+	}
+	function closeModal() {
+		setOpened(false);
+	}
 	const styles = useStyles();
 	return (
 		<>
@@ -68,12 +94,15 @@ export const ProfileForm: React.FC<{}> = () => {
 					<Box className={styles["input-wrapper"]}>
 						<AssignmentInd className={styles["form__icon"]} />
 						<TextField
-							className={styles.form__input}
+							className={styles.form__input + " " + classes.form__input}
 							label="Фамилия и имя"
 							placeholder="Укажите вашу фамилию и имя"
 							variant="outlined"
 							InputLabelProps={{
 								shrink: true,
+							}}
+							classes={{
+								root: styles.root,
 							}}
 						/>
 					</Box>
@@ -90,6 +119,9 @@ export const ProfileForm: React.FC<{}> = () => {
 							InputLabelProps={{
 								shrink: true,
 							}}
+							classes={{
+								root: styles.root,
+							}}
 						/>
 					</Box>
 
@@ -105,6 +137,9 @@ export const ProfileForm: React.FC<{}> = () => {
 							InputLabelProps={{
 								shrink: true,
 							}}
+							classes={{
+								root: styles.root,
+							}}
 						/>
 					</Box>
 				</Container>
@@ -113,7 +148,13 @@ export const ProfileForm: React.FC<{}> = () => {
 						styles["form-container"] + " " + styles["form-container_bottom"]
 					}
 				>
-					<Button className={styles.form__button}>Сохранить изменения</Button>
+					<Button
+						onClick={openModal}
+						className={styles.form__button + " " + classes.form__button}
+					>
+						Сохранить изменения
+					</Button>
+					<ProfileEditModal closeModal={closeModal} opened={opened} />
 				</Container>
 			</Card>
 		</>
