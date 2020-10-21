@@ -7,9 +7,10 @@ import {
 	TextField,
 } from "@material-ui/core";
 import { AssignmentInd, Phone, AlternateEmail } from "@material-ui/icons";
-import React, { useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { ProfileEditModal } from "./ProfileEditModal/ProfileEditModal";
 import classes from "./ProfileForm.module.sass";
+import { validator, Error } from "../helpers/validator";
 const useStyles = makeStyles((theme) => ({
 	form: {
 		display: "flex",
@@ -22,13 +23,13 @@ const useStyles = makeStyles((theme) => ({
 		display: "flex",
 		alignItems: "center",
 		flexDirection: "row",
-		paddingTop: "26px",
+		paddingTop: "49px",
 		paddingBottom: "15px",
 		justifyContent: "center",
 		maxWidth: "none",
 	},
 	["form-container_bottom"]: {
-		paddingTop: "15px",
+		paddingTop: "5px",
 		paddingBottom: "44px",
 	},
 	form__separator: {
@@ -43,12 +44,14 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: "center",
 		width: "100%",
 		maxWidth: "350px",
+		height: "80px",
 	},
 	["form__icon"]: {
 		width: "36px",
 		height: "36px",
 		fill: "#00BFA5",
 		marginRight: "42px",
+		marginBottom: "26px",
 	},
 	form__input: {
 		maxWidth: "270px",
@@ -96,10 +99,13 @@ const useStyles = makeStyles((theme) => ({
 	["@media (max-width: 684px)"]: {
 		["form-container"]: {
 			flexDirection: "column",
-			padding: "13px 23px",
+			padding: "13px 23px 0px",
 		},
 		["input-wrapper"]: {
-			margin: "10px auto",
+			margin: "13px auto 0px auto",
+		},
+		["input-wrapper:last-child"]: {
+			marginBottom: "0px",
 		},
 		form__separator: {
 			display: "none",
@@ -109,7 +115,7 @@ const useStyles = makeStyles((theme) => ({
 			paddingBottom: "15px",
 		},
 		["form-container_bottom"]: {
-			padding: "3px 0 16px",
+			padding: "0px 0px 16px",
 		},
 	},
 	["@media (max-width: 414px)"]: {
@@ -138,6 +144,7 @@ const useStyles = makeStyles((theme) => ({
 				lineHeight: "19px",
 			},
 		},
+		height: "80px",
 	},
 	["modalBody_down"]: {
 		transform: "translateY(120%)",
@@ -145,9 +152,37 @@ const useStyles = makeStyles((theme) => ({
 }));
 export const ProfileForm: React.FC<{}> = () => {
 	const [opened, setOpened] = useState(false);
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [phone, setPhone] = useState("");
+	const [nameError, setNameError] = useState<Error>({ error: false, text: "" });
+	const [emailError, setEmailError] = useState<Error>({
+		error: false,
+		text: "",
+	});
+	const [phoneError, setPhoneError] = useState<Error>({
+		error: false,
+		text: "",
+	});
 	let timeouts: NodeJS.Timeout[] = [];
+	function checkForm() {
+		validator.clear();
+		validator.checkEmail(email);
+		validator.checkName(name);
+		validator.checkPhone(phone);
+		setNameError({ error: !!validator.nameError, text: validator.nameError });
+		setEmailError({
+			error: !!validator.emailError,
+			text: validator.emailError,
+		});
+		setPhoneError({
+			error: !!validator.phoneError,
+			text: validator.phoneError,
+		});
+	}
 	function openModal() {
-		setOpened(true);
+		checkForm();
+		validator.valid && setOpened(true);
 	}
 	function closeModal() {
 		if (document.body.clientWidth < 415) {
@@ -180,6 +215,12 @@ export const ProfileForm: React.FC<{}> = () => {
 							label="Фамилия и имя"
 							placeholder="Укажите вашу фамилию и имя"
 							variant="outlined"
+							error={nameError.error}
+							helperText={nameError.text}
+							value={name}
+							onChange={(e: ChangeEvent<HTMLInputElement>) => {
+								setName(e.target.value);
+							}}
 							InputLabelProps={{
 								shrink: true,
 							}}
@@ -198,6 +239,12 @@ export const ProfileForm: React.FC<{}> = () => {
 							label="E-mail"
 							placeholder="Ivanova@mail.ru"
 							variant="outlined"
+							error={emailError.error}
+							helperText={emailError.text}
+							value={email}
+							onChange={(e: ChangeEvent<HTMLInputElement>) => {
+								setEmail(e.target.value);
+							}}
 							InputLabelProps={{
 								shrink: true,
 							}}
@@ -216,6 +263,12 @@ export const ProfileForm: React.FC<{}> = () => {
 							label="Номер телефона"
 							placeholder="Укажите номер телефона"
 							variant="outlined"
+							error={phoneError.error}
+							helperText={phoneError.text}
+							value={phone}
+							onChange={(e: ChangeEvent<HTMLInputElement>) => {
+								setPhone(e.target.value);
+							}}
 							InputLabelProps={{
 								shrink: true,
 							}}
