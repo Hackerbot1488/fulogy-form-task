@@ -21,9 +21,10 @@ export const useStyles = makeStyles((theme) => ({
 		cursor: "pointer",
 	},
 	menu__icon_user: {
-		width: "48px",
-		height: "48px",
+		width: "40px",
+		height: "40px",
 		fill: "purple",
+		borderRadius: "50%",
 	},
 	menu__separator: {
 		width: "2px",
@@ -43,8 +44,8 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	["@media (max-width: 1000px)"]: {
 		menu__icon_user: {
-			width: "40px",
-			height: "40px",
+			width: "32px",
+			height: "32px",
 		},
 		menu__icon_bell: {
 			width: "32px",
@@ -66,8 +67,8 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	["@media (max-width: 684px)"]: {
 		menu__icon_user: {
-			width: "40px",
-			height: "40px",
+			width: "32px",
+			height: "32px",
 		},
 		menu__icon_bell: {
 			width: "32px",
@@ -75,7 +76,7 @@ export const useStyles = makeStyles((theme) => ({
 		},
 		menu__separator: {
 			height: "32px",
-			marginRight: "14px",
+			marginRight: "12px",
 			marginLeft: "9px",
 		},
 		["menu-container"]: {
@@ -89,8 +90,8 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	["@media (max-width: 520px)"]: {
 		menu__icon_user: {
-			width: "36px",
-			height: "36px",
+			width: "28px",
+			height: "28px",
 		},
 		menu__icon_bell: {
 			width: "28px",
@@ -105,13 +106,13 @@ export const useStyles = makeStyles((theme) => ({
 			display: "none",
 		},
 		["menu-container"]: {
-			padding: "17px 7px",
+			padding: "17px 10px",
 		},
 	},
 	["@media (max-width: 414px)"]: {
 		menu__icon_user: {
-			width: "29px",
-			height: "29px",
+			width: "24px",
+			height: "24px",
 		},
 		menu__icon_bell: {
 			width: "24px",
@@ -126,7 +127,7 @@ export const useStyles = makeStyles((theme) => ({
 			display: "none",
 		},
 		["menu-container"]: {
-			padding: "17px 7px",
+			padding: "17px 10px",
 		},
 	},
 }));

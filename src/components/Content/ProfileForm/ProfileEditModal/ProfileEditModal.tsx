@@ -5,11 +5,13 @@ import { useStyles } from "./styles";
 export interface ProfileEditModalProps {
 	opened: boolean;
 	closeModal: () => void;
+	updateUser: () => void;
 }
 
 export const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 	opened,
 	closeModal,
+	updateUser,
 }) => {
 	const styles = useStyles();
 	return (
@@ -17,11 +19,11 @@ export const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 			<Modal
 				open={opened}
 				onClose={closeModal}
-				aria-labelledby="Chnage your data"
+				aria-labelledby="Change your data"
 				aria-describedby="Phone Email Number"
 				className={styles.modal}
 			>
-				{<ModalBody closeModal={closeModal} />}
+				{<ModalBody closeModal={closeModal} updateUser={updateUser} />}
 			</Modal>
 		</>
 	);

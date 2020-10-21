@@ -4,8 +4,12 @@ import { ProfileSheet } from "./ProfileSheet/ProfileSheet";
 import { ProfileData } from "./ProfileData/ProfileData";
 import { ProfileForm } from "./ProfileForm/ProfileForm";
 import { useStyles } from "./styles";
+import { User } from "../Profile";
+export interface ContentProps {
+	user: User;
+}
 
-export const Content: React.FC<{}> = () => {
+export const Content: React.FC<ContentProps> = ({ user }) => {
 	const styles = useStyles();
 	const [editing, setEditing] = useState(false);
 	function openEdit() {
@@ -34,8 +38,9 @@ export const Content: React.FC<{}> = () => {
 					openEdit={openEdit}
 					opened={editing}
 					closeEdit={closeEdit}
+					user={user}
 				/>
-				{!editing && <ProfileData />}
+				{!editing && <ProfileData user={user} />}
 				{editing && <ProfileForm />}
 			</Container>
 		</>

@@ -5,15 +5,20 @@ import { Button, Typography } from "@material-ui/core";
 import { useStyles } from "./styles";
 export interface ModalBodyProps {
 	closeModal: () => void;
+	updateUser: () => void;
 }
 
-export const ModalBody: React.FC<ModalBodyProps> = ({ closeModal }) => {
+export const ModalBody: React.FC<ModalBodyProps> = ({
+	closeModal,
+	updateUser,
+}) => {
 	const [confirmed, setConfirmed] = useState(false);
 	const [up, setUp] = useState(false);
 	const styles = useStyles();
 	const ref = useRef(false);
 	function confirm() {
 		setConfirmed(true);
+		updateUser();
 	}
 	let timeout;
 	useEffect(() => {

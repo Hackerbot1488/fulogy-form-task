@@ -1,13 +1,15 @@
 import { Box, Button, Card, Container, TextField } from "@material-ui/core";
 import { AssignmentInd, Phone, AlternateEmail } from "@material-ui/icons";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import { ProfileEditModal } from "./ProfileEditModal/ProfileEditModal";
 import classes from "./ProfileForm.module.sass";
 import { validator, Error } from "../../../helpers/validator";
 import { useStyles } from "./styles";
+import { UserContext } from "../../../helpers/context";
 
 export const ProfileForm: React.FC<{}> = () => {
 	const [opened, setOpened] = useState(false);
+	const { updateData } = useContext(UserContext);
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
@@ -54,11 +56,29 @@ export const ProfileForm: React.FC<{}> = () => {
 			setOpened(false);
 		}
 	}
+	function updateUser() {
+		localStorage.setItem(
+			"user",
+			JSON.stringify({
+				name: name.match(/[а-яА-я]+/g)!.join(" "),
+				email,
+				phone,
+			})
+		);
+		updateData({
+			name: name.match(/[а-яА-я]+/g)!.join(" "),
+			email,
+			phone,
+		});
+		setName("");
+		setEmail("");
+		setPhone("");
+	}
 	useEffect(() => {
 		return () => {
 			timeouts.forEach((tm) => clearTimeout(tm));
 		};
-	}, []);
+	}, [timeouts]);
 	const styles = useStyles();
 	return (
 		<>
@@ -145,7 +165,11 @@ export const ProfileForm: React.FC<{}> = () => {
 					>
 						Сохранить изменения
 					</Button>
-					<ProfileEditModal closeModal={closeModal} opened={opened} />
+					<ProfileEditModal
+						closeModal={closeModal}
+						opened={opened}
+						updateUser={updateUser}
+					/>
 				</Container>
 			</Card>
 		</>

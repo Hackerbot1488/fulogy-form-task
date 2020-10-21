@@ -1,28 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AppBar, Box, Toolbar, Typography } from "@material-ui/core";
-import { AccountCircle, NotificationsNone } from "@material-ui/icons";
+import { NotificationsNone } from "@material-ui/icons";
 import { useStyles } from "./styles";
-import { User } from "../Content/ProfileData/ProfileData";
-
-export const Header: React.FC<{}> = () => {
+import { User } from "../Profile";
+import { ReactComponent as UserIcon } from "../../assets/UserIcon.svg";
+export interface HeaderProps {
+	user: User;
+}
+export const Header: React.FC<HeaderProps> = ({ user }) => {
 	const styles = useStyles();
-	const [user, setUser] = useState<User>();
-	useEffect(() => {
-		setUser(
-			JSON.parse(localStorage.getItem("user") || "null") || {
-				name: "Иванова Анна Михайловна",
-				email: "Ivanova@mail.ru",
-				phone: "Укажите номер телефона",
-			}
-		);
-	}, []);
 	function cutName() {
-		if (user?.name) {
-			const pieces = user.name.split(" ");
-			return pieces[0] + " " + pieces[1][0] + ".";
-		} else {
-			return "";
-		}
+		const pieces = user.name.split(" ");
+		return pieces[0] + " " + pieces[1][0] + ".";
 	}
 	return (
 		<>
@@ -31,9 +20,9 @@ export const Header: React.FC<{}> = () => {
 					<NotificationsNone className={styles.menu__icon_bell} />
 					<span className={styles.menu__separator}></span>
 					<Box className={styles.menu__userwrapper}>
-						<AccountCircle className={styles.menu__icon_user} />
+						<UserIcon className={styles.menu__icon_user} />
 						<Typography className={styles.menu__username}>
-							{cutName() || "Иванова А."}
+							{cutName()}
 						</Typography>
 					</Box>
 				</Toolbar>

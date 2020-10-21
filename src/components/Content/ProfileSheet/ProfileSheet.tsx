@@ -1,36 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Card, Typography, Button } from "@material-ui/core";
-import { AccountCircle, Create, Close } from "@material-ui/icons";
+import { Create, Close } from "@material-ui/icons";
 import { useStyles } from "./styles";
-import { User } from "../ProfileData/ProfileData";
-
+import { User } from "../../Profile";
+import { ReactComponent as UserIcon } from "../../../assets/UserIcon.svg";
 export interface ProfileSheetProps {
 	opened: boolean;
 	closeEdit: () => void;
 	openEdit: () => void;
+	user: User;
 }
 export const ProfileSheet: React.FC<ProfileSheetProps> = ({
 	opened,
 	openEdit,
 	closeEdit,
+	user,
 }) => {
 	const styles = useStyles();
-	const [user, setUser] = useState<User>();
-	useEffect(() => {
-		setUser(
-			JSON.parse(localStorage.getItem("user") || "null") || {
-				name: "Иванова Анна Михайловна",
-				email: "Ivanova@mail.ru",
-				phone: "Укажите номер телефона",
-			}
-		);
-	}, []);
 	return (
 		<>
 			<Card className={styles.profile}>
-				<AccountCircle className={styles.profile__icon_user} />
+				<UserIcon className={styles.profile__icon_user} />
 				<Typography className={styles.profile__username}>
-					{user?.name || "Иванова Анна Михайловна"}
+					{user.name}
 				</Typography>
 				<Button
 					className={styles.profile__button}

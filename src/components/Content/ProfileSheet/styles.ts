@@ -10,13 +10,14 @@ export const useStyles = makeStyles((theme) => ({
 		alignItems: "center",
 		color: "#fff",
 		width: "100%",
-		padding: "16px 25px 16px 22px",
+		padding: "24px 25px 24px 30px",
 		margin: "32px 0px 24px",
 	},
 	profile__icon_user: {
-		width: "96px",
-		height: "96px",
+		width: "80px",
+		height: "80px",
 		fill: "purple",
+		borderRadius: "50%",
 	},
 	profile__username: {
 		fontSize: "30px",
@@ -53,8 +54,8 @@ export const useStyles = makeStyles((theme) => ({
 			margin: "26px 0px 20px",
 		},
 		profile__icon_user: {
-			width: "72px",
-			height: "72px",
+			width: "60px",
+			height: "60px",
 		},
 		profile__username: {
 			fontSize: "23px",
@@ -72,7 +73,7 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	["@media (max-width: 684px)"]: {
 		profile: {
-			padding: "9px 14px 9px 12px",
+			padding: "16px 14px 16px 12px",
 			margin: "18px 0px 16px",
 		},
 		profile__icon_user: {
@@ -94,17 +95,17 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	["@media (max-width: 520px)"]: {
 		profile: {
-			padding: "8px 8px 8px 2px",
+			padding: "16px 8px 16px 10px",
 			margin: "14px 0px 13px",
 		},
 		profile__icon_user: {
-			width: "48px",
-			height: "48px",
+			width: "40px",
+			height: "40px",
 		},
 		profile__username: {
 			fontSize: "14px",
 			lineHeight: "19px",
-			marginLeft: "2px",
+			marginLeft: "10px",
 		},
 		profile__button: {
 			width: "94px",

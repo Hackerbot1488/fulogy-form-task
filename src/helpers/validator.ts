@@ -24,6 +24,7 @@ export const validator = {
 				break;
 			default:
 				this.nameError = "Неверный формат";
+				this.valid = false;
 				return;
 		}
 		nameParts = nameParts.filter((part) => part.match(/^[а-яА-Я]+$/));
