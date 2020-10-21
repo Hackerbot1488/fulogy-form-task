@@ -16,6 +16,13 @@ export const Profile: React.FC<{}> = () => {
 	});
 	function updateData(user: User) {
 		setUserProfile(user);
+		fetch("/api/sendUser", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(user),
+		});
 	}
 	return (
 		<>
