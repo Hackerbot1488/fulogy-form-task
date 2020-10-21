@@ -36,7 +36,14 @@ export default function MyApp(props: AppProps) {
 			</ThemeProvider>
 			<style jsx global>{`
 				body {
-					background: linear-gradient(270deg, #2196f3 0%, #1ec3af 101.06%);
+					background-image: url(./images/wave.svg);
+					background-repeat: no-repeat;
+					background-size: 100%;
+				}
+				@media (max-width: 1000px) {
+					body {
+						background-size: auto 50%;
+					}
 				}
 			`}</style>
 		</React.Fragment>
