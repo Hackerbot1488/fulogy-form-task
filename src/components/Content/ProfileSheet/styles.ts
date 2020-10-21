@@ -1,7 +1,6 @@
-import React from "react";
-import { Card, makeStyles, Typography, Button } from "@material-ui/core";
-import { AccountCircle, Create, Close } from "@material-ui/icons";
-const useStyles = makeStyles((theme) => ({
+import { makeStyles } from "@material-ui/core";
+
+export const useStyles = makeStyles((theme) => ({
 	profile: {
 		display: "flex",
 		background: "linear-gradient(270deg, #1A78C2 0%, #1A78C2 101.06%)",
@@ -130,38 +129,3 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 }));
-export interface ProfileSheetProps {
-	opened: boolean;
-	closeEdit: () => void;
-	openEdit: () => void;
-}
-export const ProfileSheet: React.FC<ProfileSheetProps> = ({
-	opened,
-	openEdit,
-	closeEdit,
-}) => {
-	const styles = useStyles();
-	return (
-		<>
-			<Card className={styles.profile}>
-				<AccountCircle className={styles.profile__icon_user} />
-				<Typography className={styles.profile__username}>
-					Иванова Анна Михайловна
-				</Typography>
-				<Button
-					className={styles.profile__button}
-					onClick={() => (opened ? closeEdit() : openEdit())}
-				>
-					<span className={styles.profile__button_text}>
-						{opened ? "закрыть" : "редактировать"}
-					</span>
-					{opened ? (
-						<Close className={styles.profile__button_icon} />
-					) : (
-						<Create className={styles.profile__button_icon} />
-					)}
-				</Button>
-			</Card>
-		</>
-	);
-};

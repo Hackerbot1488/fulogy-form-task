@@ -1,9 +1,9 @@
 import { Box, Button, Card, Container, TextField } from "@material-ui/core";
 import { AssignmentInd, Phone, AlternateEmail } from "@material-ui/icons";
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { ProfileEditModal } from "../ProfileEditModal/ProfileEditModal";
+import { ProfileEditModal } from "./ProfileEditModal/ProfileEditModal";
 import classes from "./ProfileForm.module.sass";
-import { validator, Error } from "../../helpers/validator";
+import { validator, Error } from "../../../helpers/validator";
 import { useStyles } from "./styles";
 
 export const ProfileForm: React.FC<{}> = () => {
