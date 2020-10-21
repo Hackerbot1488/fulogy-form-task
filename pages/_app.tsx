@@ -49,8 +49,3 @@ export default function MyApp(props: AppProps) {
 		</React.Fragment>
 	);
 }
-
-/* MyApp.propTypes = {
-	Component: PropTypes.elementType.isRequired,
-	pageProps: PropTypes.object.isRequired,
-}; */

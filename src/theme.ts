@@ -12,6 +12,22 @@ const theme = createMuiTheme({
 		fontWeightRegular: 400,
 		fontWeightBold: 600,
 	},
+	overrides: {
+		MuiCssBaseline: {
+			"@global": {
+				body: {
+					display: "flex",
+					margin: "0",
+					padding: "0",
+					boxSizing: "border-box",
+					minHeight: "100vh",
+				},
+				"#__next": {
+					width: "100%",
+				},
+			},
+		},
+	},
 });
 
 export default theme;

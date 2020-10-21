@@ -1,15 +1,7 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
-import theme from "../src/theme";
-import { CSSProperties } from "@material-ui/core/styles/withStyles";
-const styles: CSSProperties = {
-	display: "flex",
-	margin: 0,
-	padding: 0,
-	boxSizing: "border-box",
-	minHeight: "100vh",
-};
+
 export default class MyDocument extends Document {
 	render() {
 		return (
@@ -26,15 +18,10 @@ export default class MyDocument extends Document {
 						rel="stylesheet"
 					></link>
 				</Head>
-				<body style={styles}>
+				<body>
 					<Main />
 					<NextScript />
 				</body>
-				<style jsx global>{`
-					#__next {
-						width: 100%;
-					}
-				`}</style>
 			</Html>
 		);
 	}
