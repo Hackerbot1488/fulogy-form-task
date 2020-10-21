@@ -9,6 +9,13 @@ const useStyles = makeStyles((theme) => ({
 	modal: {
 		display: "flex",
 		alignItems: "center",
+		padding: "0 10px",
+	},
+	["@media (max-width: 414px)"]: {
+		modal: {
+			alignItems: "flex-end",
+			padding: "0",
+		},
 	},
 }));
 export const ProfileEditModal: React.FC<ProfileEditModalProps> = ({

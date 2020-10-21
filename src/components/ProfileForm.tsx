@@ -7,7 +7,7 @@ import {
 	TextField,
 } from "@material-ui/core";
 import { AssignmentInd, Phone, AlternateEmail } from "@material-ui/icons";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ProfileEditModal } from "./ProfileEditModal/ProfileEditModal";
 import classes from "./ProfileForm.module.sass";
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +41,8 @@ const useStyles = makeStyles((theme) => ({
 	["input-wrapper"]: {
 		display: "flex",
 		alignItems: "center",
+		width: "100%",
+		maxWidth: "350px",
 	},
 	["form__icon"]: {
 		width: "36px",
@@ -49,9 +51,8 @@ const useStyles = makeStyles((theme) => ({
 		marginRight: "42px",
 	},
 	form__input: {
-		fontSize: "14px",
-		lineHeight: "19px",
-		width: "270px",
+		maxWidth: "270px",
+		width: "100%",
 	},
 	form__button: {
 		color: "#fff",
@@ -60,7 +61,64 @@ const useStyles = makeStyles((theme) => ({
 		lineHeight: "19px",
 		fontWeight: 600,
 		borderRadius: "36px",
-		padding: "15px 26px",
+		flex: 1,
+		maxWidth: "212px",
+		paddingTop: "15px",
+		paddingBottom: "15px",
+		width: "100%",
+	},
+	["@media (max-width: 1200px)"]: {
+		form__separator: {
+			margin: 0,
+		},
+		form__icon: {
+			display: "none",
+		},
+		form__button: {
+			margin: "0px auto",
+		},
+		["form-container"]: {
+			justifyContent: "space-between",
+		},
+		["input-wrapper"]: {
+			maxWidth: "270px",
+		},
+	},
+	["@media (max-width: 1000px)"]: {
+		form__separator: {
+			display: "none",
+		},
+		["input-wrapper"]: {
+			maxWidth: "270px",
+			padding: "0 10px",
+		},
+	},
+	["@media (max-width: 684px)"]: {
+		["form-container"]: {
+			flexDirection: "column",
+			padding: "13px 23px",
+		},
+		["input-wrapper"]: {
+			margin: "10px auto",
+		},
+		form__separator: {
+			display: "none",
+		},
+		form__button: {
+			paddingTop: "15px",
+			paddingBottom: "15px",
+		},
+		["form-container_bottom"]: {
+			padding: "3px 0 16px",
+		},
+	},
+	["@media (max-width: 414px)"]: {
+		form__icon: {
+			display: "none",
+		},
+		["input-wrapper"]: {
+			padding: "0",
+		},
 	},
 	root: {
 		"& label": {
@@ -75,17 +133,41 @@ const useStyles = makeStyles((theme) => ({
 			"&.Mui-focused fieldset": {
 				borderColor: "#01bda7",
 			},
+			"& input": {
+				fontSize: "14px",
+				lineHeight: "19px",
+			},
 		},
+	},
+	["modalBody_down"]: {
+		transform: "translateY(120%)",
 	},
 }));
 export const ProfileForm: React.FC<{}> = () => {
 	const [opened, setOpened] = useState(false);
+	let timeouts: NodeJS.Timeout[] = [];
 	function openModal() {
 		setOpened(true);
 	}
 	function closeModal() {
-		setOpened(false);
+		if (document.body.clientWidth < 415) {
+			document
+				.querySelector("#modal-body")
+				?.classList.add(styles.modalBody_down);
+			timeouts.push(
+				setTimeout(() => {
+					setOpened(false);
+				}, 400)
+			);
+		} else {
+			setOpened(false);
+		}
 	}
+	useEffect(() => {
+		return () => {
+			timeouts.forEach((tm) => clearTimeout(tm));
+		};
+	}, []);
 	const styles = useStyles();
 	return (
 		<>
