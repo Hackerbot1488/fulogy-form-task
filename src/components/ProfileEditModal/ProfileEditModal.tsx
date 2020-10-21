@@ -1,23 +1,12 @@
-import { makeStyles, Modal } from "@material-ui/core";
+import { Modal } from "@material-ui/core";
 import React from "react";
-import { ModalBody } from "./ModalBody";
+import { ModalBody } from "./ModalBody/ModalBody";
+import { useStyles } from "./styles";
 export interface ProfileEditModalProps {
 	opened: boolean;
 	closeModal: () => void;
 }
-const useStyles = makeStyles((theme) => ({
-	modal: {
-		display: "flex",
-		alignItems: "center",
-		padding: "0 10px",
-	},
-	["@media (max-width: 414px)"]: {
-		modal: {
-			alignItems: "flex-end",
-			padding: "0",
-		},
-	},
-}));
+
 export const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 	opened,
 	closeModal,
