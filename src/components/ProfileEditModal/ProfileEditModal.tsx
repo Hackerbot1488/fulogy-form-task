@@ -32,7 +32,7 @@ export const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 				aria-describedby="Phone Email Number"
 				className={styles.modal}
 			>
-				<ModalBody closeModal={closeModal} />
+				{<ModalBody closeModal={closeModal} />}
 			</Modal>
 		</>
 	);
