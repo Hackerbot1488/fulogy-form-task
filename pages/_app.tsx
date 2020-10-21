@@ -42,7 +42,7 @@ export default function MyApp(props: AppProps) {
 				}
 				@media (max-width: 1000px) {
 					body {
-						background-size: auto 50%;
+						background-image: url(./images/wave-mobile.svg);
 					}
 				}
 			`}</style>
