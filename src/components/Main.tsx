@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 			width: "100%",
 		},
 		breadcrumbs: {
-			marginTop: "10px",
+			marginTop: "8px",
 			color: "#fff",
 		},
 		breadcrumbs__crumb: {
